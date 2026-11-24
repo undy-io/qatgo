@@ -1,0 +1,104 @@
+{
+  "race_and_cgocheck2": "passed after shared multi-instance runtime changes",
+  "hardware_tests_exit_code": 0,
+  "stdin_blob_bytes": 268435456,
+  "stdin_sha256": "486cc817b95d853d3c357ff283b204c0144bd255e73fe2deb1389493b257e3c0",
+  "stdin_digest_verified": true,
+  "stdin_total_seconds_including_startup": 1.628756924008485,
+  "stdin_boundary_checks": "passed: empty, abc split across 2-byte reads, irregular 257-byte reads",
+  "new_qat_kernel_warnings": [],
+  "default_benchmark_verified": true,
+  "default_benchmark_file": "defaults-256mib.json",
+  "benchmark_cpu_affinity": [
+    0,
+    2
+  ],
+  "hardware_test_log": "parallel-hardware-tests.log",
+  "cooperative_cancellation": {
+    "accepted_request_observed": {
+      "submitted": 1,
+      "completed": 0
+    },
+    "after_drain": {
+      "submitted": 1,
+      "completed": 1
+    },
+    "ownership_retained_until_callback": true,
+    "buffer_reuse_verified": true,
+    "blocked_producer_unblocked": true,
+    "test_log": "cancellation-tests.log",
+    "test_poll_interval_ms": 250,
+    "scope": "CPA accepted request with completion callback pending; does not assert silicon active at cancel instant"
+  },
+  "allocation_experiment": {
+    "file": "allocation-256mib.json",
+    "all_digests_verified": true,
+    "measured_rounds": 7,
+    "allocation_and_free_mean_ms": 71.35360742857142,
+    "reuse_mean_total_ms": 511.60381442857135,
+    "fresh_mean_total_ms": 599.164331
+  },
+  "parallel_hardware_lifecycle": "passed: duplicate/failed opens, cross-engine ownership rejection, close/reopen while other engines survive",
+  "three_endpoint_requests_pending": "passed: actual accepted CPA requests with callbacks pending on instances 0,32,64; closing idle instance1 leaves active work intact",
+  "parallel_benchmark": {
+    "file": "parallel-256mib.json",
+    "all_digests_verified": true,
+    "bytes_per_blob": 268435456,
+    "measured_batches": 3,
+    "best_measured_case": "three8",
+    "workers": 24,
+    "payload_bytes": 6442450944,
+    "qat_aggregate_mib_per_second": 12796.242356773095,
+    "cpu_aggregate_mib_per_second": 4815.171552242339,
+    "qat_speedup_vs_single": 22.0485381841611,
+    "qat_speedup_vs_matched_cpu": 2.6574842075593574,
+    "cpu_affinity": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54
+    ],
+    "logical_cpus": 28,
+    "physical_cores": 14,
+    "scope": "resident data; allocation, input filling and session setup/cleanup excluded"
+  },
+  "receive_overlap_comparison": {
+    "overlapped_file": "receive-overlap.json",
+    "serial_file": "receive-serial.json",
+    "overlapped_mean_ms": 445.3377803333333,
+    "serial_mean_ms": 497.793623,
+    "throughput_ratio": 1.1177888896545085,
+    "all_digests_verified": true,
+    "cpu_affinity": [
+      0,
+      2
+    ],
+    "scope": "unpaced synthetic writes into disjoint ranges of one contiguous 256 MiB buffer"
+  },
+  "parallel_kernel_log": "parallel-kernel.log",
+  "parallel_qat_kernel_messages": []
+}

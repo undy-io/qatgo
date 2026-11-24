@@ -1,0 +1,1967 @@
+{
+  "generated_utc": "2026-11-21T05:26:50.997917143Z",
+  "go_version": "go1.27.4",
+  "gomaxprocs": 28,
+  "bytes_per_blob": 268435456,
+  "measured_batches_per_backend": 3,
+  "warmup_batches_per_backend": 1,
+  "poll_us": 250,
+  "allocation_bytes": 4194304,
+  "request_bytes": 4194304,
+  "sha256": "ad393ddd80e45166dff61eb09641bddbd2e4df8fff9ce4b7b6516dda4d580cdb",
+  "all_digests_verified": true,
+  "measurement_notes": [
+    "Resident-data benchmark: buffer allocation, fill, page first touch, engine initialization, session creation and cleanup are outside timed batches.",
+    "Every worker owns one independent contiguous DMA buffer and digest state. Shared3 intentionally uses three streams on one serialized engine.",
+    "QAT batch timing includes synchronized start, submission and Finish completion; individual latencies start when each worker is scheduled.",
+    "Process CPU time is measured once around the whole batch, across all process threads. Digest verification is outside timing.",
+    "CPU baselines use the same resident buffers; duplicate worker counts reference the first measured case with that count, which can have different PCI/NUMA placement.",
+    "Cases are sequential; all buffers and engines close before the next case. Largest default case holds 3 GiB payload; optional three8 holds 6 GiB, plus allocator overhead.",
+    "Host-specific presets require crypto indexes 0..31 on PCI bus 3d, 32..63 on 3f and 64..95 on 41; mappings are checked before timing.",
+    "Independent instance counts refer to software Engine handles/crypto channels, not physical compute engines; the result label was clarified after measurement without changing timing data."
+  ],
+  "cases": [
+    {
+      "name": "single",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 268435456,
+      "qat": {
+        "mean_batch_wall_ms": 441.1002556666667,
+        "median_batch_wall_ms": 440.689052,
+        "mean_process_cpu_ms": 21.866666666666664,
+        "mean_process_cpu_ms_per_blob": 21.866666666666664,
+        "aggregate_mib_per_second": 580.3669272716442,
+        "mean_individual_blob_latency_ms": 441.09466533333335,
+        "max_individual_blob_latency_ms": 441.976922,
+        "samples": [
+          {
+            "batch_wall_ms": 440.689052,
+            "process_cpu_ms": 22.15,
+            "process_cpu_ms_per_blob": 22.15,
+            "aggregate_mib_per_second": 580.908463321662,
+            "individual_blob_latency_ms": [
+              440.683272
+            ]
+          },
+          {
+            "batch_wall_ms": 441.981934,
+            "process_cpu_ms": 20.17,
+            "process_cpu_ms_per_blob": 20.17,
+            "aggregate_mib_per_second": 579.2091945549973,
+            "individual_blob_latency_ms": [
+              441.976922
+            ]
+          },
+          {
+            "batch_wall_ms": 440.629781,
+            "process_cpu_ms": 23.28,
+            "process_cpu_ms_per_blob": 23.28,
+            "aggregate_mib_per_second": 580.986603808334,
+            "individual_blob_latency_ms": [
+              440.623802
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 752.0926083333334,
+        "median_batch_wall_ms": 770.320026,
+        "mean_process_cpu_ms": 754.5039999999999,
+        "mean_process_cpu_ms_per_blob": 754.5039999999999,
+        "aggregate_mib_per_second": 340.38361388407475,
+        "mean_individual_blob_latency_ms": 752.083215,
+        "max_individual_blob_latency_ms": 770.743957,
+        "samples": [
+          {
+            "batch_wall_ms": 770.753512,
+            "process_cpu_ms": 773.354,
+            "process_cpu_ms_per_blob": 773.354,
+            "aggregate_mib_per_second": 332.1425021284885,
+            "individual_blob_latency_ms": [
+              770.743957
+            ]
+          },
+          {
+            "batch_wall_ms": 715.204287,
+            "process_cpu_ms": 717.11,
+            "process_cpu_ms_per_blob": 717.11,
+            "aggregate_mib_per_second": 357.9396889157629,
+            "individual_blob_latency_ms": [
+              715.195899
+            ]
+          },
+          {
+            "batch_wall_ms": 770.320026,
+            "process_cpu_ms": 773.048,
+            "process_cpu_ms_per_blob": 773.048,
+            "aggregate_mib_per_second": 332.3294103222496,
+            "individual_blob_latency_ms": [
+              770.309789
+            ]
+          }
+        ]
+      },
+      "independent_instances": 1
+    },
+    {
+      "name": "shared3",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 805306368,
+      "qat": {
+        "mean_batch_wall_ms": 1321.9596813333333,
+        "median_batch_wall_ms": 1321.708864,
+        "mean_process_cpu_ms": 71.73299999999999,
+        "mean_process_cpu_ms_per_blob": 23.911,
+        "aggregate_mib_per_second": 580.9556908917165,
+        "mean_individual_blob_latency_ms": 1222.9811422222222,
+        "max_individual_blob_latency_ms": 1322.648611,
+        "samples": [
+          {
+            "batch_wall_ms": 1321.708864,
+            "process_cpu_ms": 73.958,
+            "process_cpu_ms_per_blob": 24.652666666666665,
+            "aggregate_mib_per_second": 581.065937377265,
+            "individual_blob_latency_ms": [
+              1321.688743,
+              1218.19933,
+              1114.507743
+            ]
+          },
+          {
+            "batch_wall_ms": 1322.677537,
+            "process_cpu_ms": 71.153,
+            "process_cpu_ms_per_blob": 23.71766666666667,
+            "aggregate_mib_per_second": 580.6403892984537,
+            "individual_blob_latency_ms": [
+              1294.754134,
+              1322.648611,
+              991.802247
+            ]
+          },
+          {
+            "batch_wall_ms": 1321.492643,
+            "process_cpu_ms": 70.088,
+            "process_cpu_ms_per_blob": 23.362666666666666,
+            "aggregate_mib_per_second": 581.1610106708706,
+            "individual_blob_latency_ms": [
+              1293.552765,
+              1321.451112,
+              1128.225595
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 754.6010110000001,
+        "median_batch_wall_ms": 771.495274,
+        "mean_process_cpu_ms": 2261.9173333333333,
+        "mean_process_cpu_ms_per_blob": 753.9724444444445,
+        "aggregate_mib_per_second": 1017.7563888792615,
+        "mean_individual_blob_latency_ms": 752.6566602222222,
+        "max_individual_blob_latency_ms": 777.757038,
+        "samples": [
+          {
+            "batch_wall_ms": 771.495274,
+            "process_cpu_ms": 2317.936,
+            "process_cpu_ms_per_blob": 772.6453333333334,
+            "aggregate_mib_per_second": 995.4694809964578,
+            "individual_blob_latency_ms": [
+              771.444606,
+              771.449858,
+              770.50062
+            ]
+          },
+          {
+            "batch_wall_ms": 714.533304,
+            "process_cpu_ms": 2145.931,
+            "process_cpu_ms_per_blob": 715.3103333333333,
+            "aggregate_mib_per_second": 1074.8274372946512,
+            "individual_blob_latency_ms": [
+              713.987412,
+              713.823303,
+              714.516985
+            ]
+          },
+          {
+            "batch_wall_ms": 777.774455,
+            "process_cpu_ms": 2321.885,
+            "process_cpu_ms_per_blob": 773.9616666666667,
+            "aggregate_mib_per_second": 987.4327898825117,
+            "individual_blob_latency_ms": [
+              771.742175,
+              777.757038,
+              768.687945
+            ]
+          }
+        ]
+      },
+      "independent_instances": 1
+    },
+    {
+      "name": "one2",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 536870912,
+      "qat": {
+        "mean_batch_wall_ms": 442.6464413333333,
+        "median_batch_wall_ms": 442.174382,
+        "mean_process_cpu_ms": 46.15333333333333,
+        "mean_process_cpu_ms_per_blob": 23.076666666666664,
+        "aggregate_mib_per_second": 1156.6793544250822,
+        "mean_individual_blob_latency_ms": 441.66886316666665,
+        "max_individual_blob_latency_ms": 445.123967,
+        "samples": [
+          {
+            "batch_wall_ms": 440.638257,
+            "process_cpu_ms": 48.555,
+            "process_cpu_ms_per_blob": 24.2775,
+            "aggregate_mib_per_second": 1161.9508562099275,
+            "individual_blob_latency_ms": [
+              440.619759,
+              440.626891
+            ]
+          },
+          {
+            "batch_wall_ms": 445.126685,
+            "process_cpu_ms": 43.759,
+            "process_cpu_ms_per_blob": 21.8795,
+            "aggregate_mib_per_second": 1150.2343428365791,
+            "individual_blob_latency_ms": [
+              440.773787,
+              445.123967
+            ]
+          },
+          {
+            "batch_wall_ms": 442.174382,
+            "process_cpu_ms": 46.146,
+            "process_cpu_ms_per_blob": 23.073,
+            "aggregate_mib_per_second": 1157.9142095120292,
+            "individual_blob_latency_ms": [
+              440.69834,
+              442.170435
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 757.474208,
+        "median_batch_wall_ms": 770.999023,
+        "mean_process_cpu_ms": 1516.1816666666666,
+        "mean_process_cpu_ms_per_blob": 758.0908333333333,
+        "aggregate_mib_per_second": 675.9306054154124,
+        "mean_individual_blob_latency_ms": 756.7733718333334,
+        "max_individual_blob_latency_ms": 786.992765,
+        "samples": [
+          {
+            "batch_wall_ms": 787.01038,
+            "process_cpu_ms": 1574.482,
+            "process_cpu_ms_per_blob": 787.241,
+            "aggregate_mib_per_second": 650.5632111230858,
+            "individual_blob_latency_ms": [
+              786.992765,
+              784.761698
+            ]
+          },
+          {
+            "batch_wall_ms": 714.413221,
+            "process_cpu_ms": 1431.043,
+            "process_cpu_ms_per_blob": 715.5215,
+            "aggregate_mib_per_second": 716.6720672992697,
+            "individual_blob_latency_ms": [
+              714.114174,
+              714.403572
+            ]
+          },
+          {
+            "batch_wall_ms": 770.999023,
+            "process_cpu_ms": 1543.02,
+            "process_cpu_ms_per_blob": 771.51,
+            "aggregate_mib_per_second": 664.0734744484884,
+            "individual_blob_latency_ms": [
+              770.98236,
+              769.385662
+            ]
+          }
+        ]
+      },
+      "independent_instances": 2
+    },
+    {
+      "name": "one4",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 2,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 3,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        }
+      ],
+      "payload_bytes": 1073741824,
+      "qat": {
+        "mean_batch_wall_ms": 448.37948566666665,
+        "median_batch_wall_ms": 448.4084,
+        "mean_process_cpu_ms": 82.39633333333335,
+        "mean_process_cpu_ms_per_blob": 20.599083333333336,
+        "aggregate_mib_per_second": 2283.779773014103,
+        "mean_individual_blob_latency_ms": 444.53145991666673,
+        "max_individual_blob_latency_ms": 448.523833,
+        "samples": [
+          {
+            "batch_wall_ms": 448.532062,
+            "process_cpu_ms": 89.235,
+            "process_cpu_ms_per_blob": 22.30875,
+            "aggregate_mib_per_second": 2283.002903814711,
+            "individual_blob_latency_ms": [
+              440.624561,
+              448.523833,
+              440.530368,
+              440.583478
+            ]
+          },
+          {
+            "batch_wall_ms": 448.197995,
+            "process_cpu_ms": 78.789,
+            "process_cpu_ms_per_blob": 19.69725,
+            "aggregate_mib_per_second": 2284.70455339721,
+            "individual_blob_latency_ms": [
+              448.169221,
+              447.878296,
+              442.242283,
+              448.189821
+            ]
+          },
+          {
+            "batch_wall_ms": 448.4084,
+            "process_cpu_ms": 79.165,
+            "process_cpu_ms_per_blob": 19.79125,
+            "aggregate_mib_per_second": 2283.6325100065033,
+            "individual_blob_latency_ms": [
+              448.04307,
+              448.40131,
+              440.613918,
+              440.57736
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 764.9132916666667,
+        "median_batch_wall_ms": 771.051947,
+        "mean_process_cpu_ms": 3005.3940000000002,
+        "mean_process_cpu_ms_per_blob": 751.3485000000001,
+        "aggregate_mib_per_second": 1338.7138269865989,
+        "mean_individual_blob_latency_ms": 750.2869275833333,
+        "max_individual_blob_latency_ms": 809.556043,
+        "samples": [
+          {
+            "batch_wall_ms": 771.051947,
+            "process_cpu_ms": 3030.335,
+            "process_cpu_ms_per_blob": 757.58375,
+            "aggregate_mib_per_second": 1328.0557866226359,
+            "individual_blob_latency_ms": [
+              770.809975,
+              771.033123,
+              770.013428,
+              713.795879
+            ]
+          },
+          {
+            "batch_wall_ms": 714.08441,
+            "process_cpu_ms": 2859.31,
+            "process_cpu_ms_per_blob": 714.8275,
+            "aggregate_mib_per_second": 1434.0041396506613,
+            "individual_blob_latency_ms": [
+              714.009489,
+              713.766758,
+              714.07388,
+              713.894374
+            ]
+          },
+          {
+            "batch_wall_ms": 809.603518,
+            "process_cpu_ms": 3126.537,
+            "process_cpu_ms_per_blob": 781.63425,
+            "aggregate_mib_per_second": 1264.8166383091236,
+            "individual_blob_latency_ms": [
+              771.557418,
+              770.706,
+              809.556043,
+              770.226764
+            ]
+          }
+        ]
+      },
+      "independent_instances": 4
+    },
+    {
+      "name": "one8",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 2,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 3,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 4,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 4,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 5,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 5,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 6,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 6,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        },
+        {
+          "worker": 7,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 7,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        }
+      ],
+      "payload_bytes": 2147483648,
+      "qat": {
+        "mean_batch_wall_ms": 457.5741913333334,
+        "median_batch_wall_ms": 452.620384,
+        "mean_process_cpu_ms": 158.40566666666666,
+        "mean_process_cpu_ms_per_blob": 19.800708333333333,
+        "aggregate_mib_per_second": 4475.776909603002,
+        "mean_individual_blob_latency_ms": 450.1670375833333,
+        "max_individual_blob_latency_ms": 468.666591,
+        "samples": [
+          {
+            "batch_wall_ms": 451.428073,
+            "process_cpu_ms": 152.28,
+            "process_cpu_ms_per_blob": 19.035,
+            "aggregate_mib_per_second": 4536.713869808447,
+            "individual_blob_latency_ms": [
+              440.884048,
+              451.389226,
+              440.463608,
+              444.702588,
+              440.415426,
+              440.772121,
+              450.081871,
+              450.472567
+            ]
+          },
+          {
+            "batch_wall_ms": 468.674117,
+            "process_cpu_ms": 139.195,
+            "process_cpu_ms_per_blob": 17.399375,
+            "aggregate_mib_per_second": 4369.7740620056475,
+            "individual_blob_latency_ms": [
+              460.677251,
+              461.746109,
+              452.605499,
+              467.300843,
+              461.444678,
+              468.567958,
+              452.096554,
+              468.666591
+            ]
+          },
+          {
+            "batch_wall_ms": 452.620384,
+            "process_cpu_ms": 183.742,
+            "process_cpu_ms_per_blob": 22.96775,
+            "aggregate_mib_per_second": 4524.7630738610305,
+            "individual_blob_latency_ms": [
+              440.732903,
+              445.1827,
+              440.476762,
+              441.07818,
+              442.227001,
+              440.780897,
+              448.62715,
+              452.616371
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 793.1145646666668,
+        "median_batch_wall_ms": 825.717676,
+        "mean_process_cpu_ms": 6131.716333333334,
+        "mean_process_cpu_ms_per_blob": 766.4645416666667,
+        "aggregate_mib_per_second": 2582.2246762808363,
+        "mean_individual_blob_latency_ms": 765.656883,
+        "max_individual_blob_latency_ms": 831.679469,
+        "samples": [
+          {
+            "batch_wall_ms": 825.717676,
+            "process_cpu_ms": 6281.097,
+            "process_cpu_ms_per_blob": 785.137125,
+            "aggregate_mib_per_second": 2480.266632925998,
+            "individual_blob_latency_ms": [
+              825.635278,
+              789.35381,
+              761.875787,
+              774.024813,
+              772.710782,
+              773.392028,
+              802.57484,
+              774.781243
+            ]
+          },
+          {
+            "batch_wall_ms": 721.919468,
+            "process_cpu_ms": 5739.626,
+            "process_cpu_ms_per_blob": 717.45325,
+            "aggregate_mib_per_second": 2836.881523189509,
+            "individual_blob_latency_ms": [
+              714.53557,
+              715.412986,
+              717.069223,
+              721.856815,
+              715.494974,
+              715.535776,
+              716.614923,
+              717.193664
+            ]
+          },
+          {
+            "batch_wall_ms": 831.70655,
+            "process_cpu_ms": 6374.426,
+            "process_cpu_ms_per_blob": 796.80325,
+            "aggregate_mib_per_second": 2462.4069631290026,
+            "individual_blob_latency_ms": [
+              820.556539,
+              775.644259,
+              827.581636,
+              811.549403,
+              772.416498,
+              757.045553,
+              771.229323,
+              831.679469
+            ]
+          }
+        ]
+      },
+      "independent_instances": 8
+    },
+    {
+      "name": "one16",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 2,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 3,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 4,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 4,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 5,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 5,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 6,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 6,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        },
+        {
+          "worker": 7,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 7,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        },
+        {
+          "worker": 8,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 8,
+            "NUMANode": 0,
+            "PCI": "3d:01.4"
+          }
+        },
+        {
+          "worker": 9,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 9,
+            "NUMANode": 0,
+            "PCI": "3d:01.4"
+          }
+        },
+        {
+          "worker": 10,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 10,
+            "NUMANode": 0,
+            "PCI": "3d:01.5"
+          }
+        },
+        {
+          "worker": 11,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 11,
+            "NUMANode": 0,
+            "PCI": "3d:01.5"
+          }
+        },
+        {
+          "worker": 12,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 12,
+            "NUMANode": 0,
+            "PCI": "3d:01.6"
+          }
+        },
+        {
+          "worker": 13,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 13,
+            "NUMANode": 0,
+            "PCI": "3d:01.6"
+          }
+        },
+        {
+          "worker": 14,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 14,
+            "NUMANode": 0,
+            "PCI": "3d:01.7"
+          }
+        },
+        {
+          "worker": 15,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 15,
+            "NUMANode": 0,
+            "PCI": "3d:01.7"
+          }
+        }
+      ],
+      "payload_bytes": 4294967296,
+      "qat": {
+        "mean_batch_wall_ms": 719.671146,
+        "median_batch_wall_ms": 715.454972,
+        "mean_process_cpu_ms": 454.48866666666663,
+        "mean_process_cpu_ms_per_blob": 28.405541666666664,
+        "aggregate_mib_per_second": 5691.488428799673,
+        "mean_individual_blob_latency_ms": 694.8799597291667,
+        "max_individual_blob_latency_ms": 728.725767,
+        "samples": [
+          {
+            "batch_wall_ms": 728.802719,
+            "process_cpu_ms": 500.459,
+            "process_cpu_ms_per_blob": 31.2786875,
+            "aggregate_mib_per_second": 5620.176617370715,
+            "individual_blob_latency_ms": [
+              708.3045,
+              688.187035,
+              666.908342,
+              714.849531,
+              694.79886,
+              708.102187,
+              687.896414,
+              681.197849,
+              687.142109,
+              728.725767,
+              707.641716,
+              701.729698,
+              701.167665,
+              674.222772,
+              667.421467,
+              694.445998
+            ]
+          },
+          {
+            "batch_wall_ms": 714.755747,
+            "process_cpu_ms": 352.63,
+            "process_cpu_ms_per_blob": 22.039375,
+            "aggregate_mib_per_second": 5730.628983665941,
+            "individual_blob_latency_ms": [
+              700.662491,
+              687.849212,
+              714.718843,
+              666.921444,
+              694.60412,
+              680.822553,
+              700.86371,
+              667.515383,
+              708.258025,
+              701.34354,
+              700.918448,
+              694.344007,
+              701.49345,
+              694.71924,
+              707.839116,
+              701.454935
+            ]
+          },
+          {
+            "batch_wall_ms": 715.454972,
+            "process_cpu_ms": 510.377,
+            "process_cpu_ms_per_blob": 31.8985625,
+            "aggregate_mib_per_second": 5725.028353007239,
+            "individual_blob_latency_ms": [
+              687.18722,
+              701.41764,
+              694.644011,
+              715.435187,
+              707.876323,
+              693.954856,
+              701.375913,
+              687.712759,
+              673.926851,
+              701.294607,
+              667.093767,
+              694.2725,
+              694.518436,
+              694.357667,
+              708.196052,
+              693.903851
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 1016.4664806666666,
+        "median_batch_wall_ms": 1036.649285,
+        "mean_process_cpu_ms": 14125.576000000001,
+        "mean_process_cpu_ms_per_blob": 882.8485000000001,
+        "aggregate_mib_per_second": 4029.6459134722963,
+        "mean_individual_blob_latency_ms": 882.2786772291662,
+        "max_individual_blob_latency_ms": 1067.661558,
+        "samples": [
+          {
+            "batch_wall_ms": 1067.704833,
+            "process_cpu_ms": 14519.087,
+            "process_cpu_ms_per_blob": 907.4429375,
+            "aggregate_mib_per_second": 3836.2662352021025,
+            "individual_blob_latency_ms": [
+              773.791387,
+              882.610421,
+              1008.106591,
+              874.02513,
+              1033.520895,
+              812.142626,
+              1067.661558,
+              983.742675,
+              879.417977,
+              851.457759,
+              813.848595,
+              823.616116,
+              945.398016,
+              969.580642,
+              879.319012,
+              910.825855
+            ]
+          },
+          {
+            "batch_wall_ms": 945.045324,
+            "process_cpu_ms": 13321.724,
+            "process_cpu_ms_per_blob": 832.60775,
+            "aggregate_mib_per_second": 4334.183658687676,
+            "individual_blob_latency_ms": [
+              807.663992,
+              758.400017,
+              928.315275,
+              841.611229,
+              774.253751,
+              860.635268,
+              848.180649,
+              724.382315,
+              867.860211,
+              779.199402,
+              944.984094,
+              848.24315,
+              905.663499,
+              757.518171,
+              887.808652,
+              779.05211
+            ]
+          },
+          {
+            "batch_wall_ms": 1036.649285,
+            "process_cpu_ms": 14535.917,
+            "process_cpu_ms_per_blob": 908.4948125,
+            "aggregate_mib_per_second": 3951.1916510895967,
+            "individual_blob_latency_ms": [
+              949.625891,
+              872.831648,
+              1000.592526,
+              859.341137,
+              890.336765,
+              888.438449,
+              793.865991,
+              849.11113,
+              954.591277,
+              872.598417,
+              942.435142,
+              973.132685,
+              885.419476,
+              951.946908,
+              805.878176,
+              1036.393849
+            ]
+          }
+        ]
+      },
+      "independent_instances": 16
+    },
+    {
+      "name": "three1",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 32,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 64,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 805306368,
+      "qat": {
+        "mean_batch_wall_ms": 445.2946973333333,
+        "median_batch_wall_ms": 446.740748,
+        "mean_process_cpu_ms": 63.64833333333333,
+        "mean_process_cpu_ms_per_blob": 21.216111111111108,
+        "aggregate_mib_per_second": 1724.7005288839086,
+        "mean_individual_blob_latency_ms": 442.9435487777777,
+        "max_individual_blob_latency_ms": 448.169274,
+        "samples": [
+          {
+            "batch_wall_ms": 448.220037,
+            "process_cpu_ms": 63.69,
+            "process_cpu_ms_per_blob": 21.23,
+            "aggregate_mib_per_second": 1713.444149307408,
+            "individual_blob_latency_ms": [
+              444.183763,
+              448.169274,
+              442.912092
+            ]
+          },
+          {
+            "batch_wall_ms": 446.740748,
+            "process_cpu_ms": 58.629,
+            "process_cpu_ms_per_blob": 19.543,
+            "aggregate_mib_per_second": 1719.1178629624355,
+            "individual_blob_latency_ms": [
+              440.361097,
+              442.044355,
+              446.737658
+            ]
+          },
+          {
+            "batch_wall_ms": 440.923307,
+            "process_cpu_ms": 68.626,
+            "process_cpu_ms_per_blob": 22.875333333333334,
+            "aggregate_mib_per_second": 1741.7995098181555,
+            "individual_blob_latency_ms": [
+              440.571775,
+              440.594795,
+              440.91713
+            ]
+          }
+        ]
+      },
+      "cpu_reference_case": "shared3",
+      "independent_instances": 3
+    },
+    {
+      "name": "three2",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 32,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 33,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 4,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 64,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        },
+        {
+          "worker": 5,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 65,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 1610612736,
+      "qat": {
+        "mean_batch_wall_ms": 448.98896633333334,
+        "median_batch_wall_ms": 448.51554,
+        "mean_process_cpu_ms": 122.42699999999998,
+        "mean_process_cpu_ms_per_blob": 20.4045,
+        "aggregate_mib_per_second": 3421.0194797073477,
+        "mean_individual_blob_latency_ms": 444.29489850000004,
+        "max_individual_blob_latency_ms": 451.027594,
+        "samples": [
+          {
+            "batch_wall_ms": 448.51554,
+            "process_cpu_ms": 127.72,
+            "process_cpu_ms_per_blob": 21.286666666666665,
+            "aggregate_mib_per_second": 3424.630504441385,
+            "individual_blob_latency_ms": [
+              443.283324,
+              440.423472,
+              448.46633,
+              442.375091,
+              441.162907,
+              448.232684
+            ]
+          },
+          {
+            "batch_wall_ms": 447.388447,
+            "process_cpu_ms": 108.415,
+            "process_cpu_ms_per_blob": 18.069166666666668,
+            "aggregate_mib_per_second": 3433.258078745158,
+            "individual_blob_latency_ms": [
+              446.424695,
+              446.652578,
+              447.339325,
+              446.670633,
+              447.330889,
+              440.780628
+            ]
+          },
+          {
+            "batch_wall_ms": 451.062912,
+            "process_cpu_ms": 131.146,
+            "process_cpu_ms_per_blob": 21.857666666666663,
+            "aggregate_mib_per_second": 3405.289947669207,
+            "individual_blob_latency_ms": [
+              440.657882,
+              441.463761,
+              441.652105,
+              451.027594,
+              442.578828,
+              440.785447
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 769.5170006666666,
+        "median_batch_wall_ms": 773.835307,
+        "mean_process_cpu_ms": 4544.685,
+        "mean_process_cpu_ms_per_blob": 757.4475000000001,
+        "aggregate_mib_per_second": 1996.0572653616427,
+        "mean_individual_blob_latency_ms": 756.4913307222223,
+        "max_individual_blob_latency_ms": 816.431309,
+        "samples": [
+          {
+            "batch_wall_ms": 816.509598,
+            "process_cpu_ms": 4730.435,
+            "process_cpu_ms_per_blob": 788.4058333333334,
+            "aggregate_mib_per_second": 1881.1781316010936,
+            "individual_blob_latency_ms": [
+              770.80984,
+              790.026864,
+              784.828017,
+              816.431309,
+              791.082807,
+              771.184152
+            ]
+          },
+          {
+            "batch_wall_ms": 718.206097,
+            "process_cpu_ms": 4298.79,
+            "process_cpu_ms_per_blob": 716.465,
+            "aggregate_mib_per_second": 2138.6618777200383,
+            "individual_blob_latency_ms": [
+              716.72167,
+              714.118537,
+              714.339897,
+              714.301638,
+              718.149252,
+              715.479699
+            ]
+          },
+          {
+            "batch_wall_ms": 773.835307,
+            "process_cpu_ms": 4604.83,
+            "process_cpu_ms_per_blob": 767.4716666666667,
+            "aggregate_mib_per_second": 1984.918478267366,
+            "individual_blob_latency_ms": [
+              772.688433,
+              734.727768,
+              772.020805,
+              773.202578,
+              772.918287,
+              773.8124
+            ]
+          }
+        ]
+      },
+      "independent_instances": 6
+    },
+    {
+      "name": "three4",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 2,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 3,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 4,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 32,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 5,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 33,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 6,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 34,
+            "NUMANode": 0,
+            "PCI": "3f:01.1"
+          }
+        },
+        {
+          "worker": 7,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 35,
+            "NUMANode": 0,
+            "PCI": "3f:01.1"
+          }
+        },
+        {
+          "worker": 8,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 64,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        },
+        {
+          "worker": 9,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 65,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        },
+        {
+          "worker": 10,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 66,
+            "NUMANode": 0,
+            "PCI": "41:01.1"
+          }
+        },
+        {
+          "worker": 11,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 67,
+            "NUMANode": 0,
+            "PCI": "41:01.1"
+          }
+        }
+      ],
+      "payload_bytes": 3221225472,
+      "qat": {
+        "mean_batch_wall_ms": 451.40025299999996,
+        "median_batch_wall_ms": 451.650221,
+        "mean_process_cpu_ms": 202.49699999999999,
+        "mean_process_cpu_ms_per_blob": 16.874750000000002,
+        "aggregate_mib_per_second": 6805.490204277755,
+        "mean_individual_blob_latency_ms": 447.39550399999996,
+        "max_individual_blob_latency_ms": 451.759587,
+        "samples": [
+          {
+            "batch_wall_ms": 451.650221,
+            "process_cpu_ms": 206.176,
+            "process_cpu_ms_per_blob": 17.18133333333333,
+            "aggregate_mib_per_second": 6801.7236727976715,
+            "individual_blob_latency_ms": [
+              442.207322,
+              440.439517,
+              448.401244,
+              451.601702,
+              451.01059,
+              445.159501,
+              440.797772,
+              451.611642,
+              442.377328,
+              451.638531,
+              451.595457,
+              442.723127
+            ]
+          },
+          {
+            "batch_wall_ms": 451.777669,
+            "process_cpu_ms": 165.13,
+            "process_cpu_ms_per_blob": 13.760833333333332,
+            "aggregate_mib_per_second": 6799.8048836716625,
+            "individual_blob_latency_ms": [
+              450.307883,
+              451.163989,
+              450.134717,
+              451.68162,
+              451.10964,
+              451.553583,
+              449.265828,
+              451.756476,
+              449.288008,
+              451.367661,
+              451.759587,
+              443.041215
+            ]
+          },
+          {
+            "batch_wall_ms": 450.772869,
+            "process_cpu_ms": 236.185,
+            "process_cpu_ms_per_blob": 19.682083333333335,
+            "aggregate_mib_per_second": 6814.962060194443,
+            "individual_blob_latency_ms": [
+              444.96134,
+              450.769108,
+              443.44805,
+              440.853775,
+              443.41947,
+              442.300642,
+              447.247756,
+              445.778046,
+              449.792386,
+              443.151149,
+              449.316023,
+              443.206459
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 851.0082316666667,
+        "median_batch_wall_ms": 836.751041,
+        "mean_process_cpu_ms": 9224.452333333333,
+        "mean_process_cpu_ms_per_blob": 768.7043611111111,
+        "aggregate_mib_per_second": 3609.83582260257,
+        "mean_individual_blob_latency_ms": 768.0732144444447,
+        "max_individual_blob_latency_ms": 885.91077,
+        "samples": [
+          {
+            "batch_wall_ms": 886.105468,
+            "process_cpu_ms": 9470.321,
+            "process_cpu_ms_per_blob": 789.1934166666666,
+            "aggregate_mib_per_second": 3466.855934129051,
+            "individual_blob_latency_ms": [
+              854.415968,
+              757.820125,
+              778.72512,
+              776.82527,
+              885.91077,
+              770.817727,
+              777.506296,
+              758.216777,
+              848.34861,
+              763.274133,
+              773.024383,
+              717.418256
+            ]
+          },
+          {
+            "batch_wall_ms": 836.751041,
+            "process_cpu_ms": 8872.62,
+            "process_cpu_ms_per_blob": 739.3850000000001,
+            "aggregate_mib_per_second": 3671.3429078363106,
+            "individual_blob_latency_ms": [
+              721.952921,
+              724.719171,
+              719.861219,
+              718.358025,
+              775.172332,
+              719.798836,
+              726.516277,
+              836.613375,
+              766.835233,
+              724.60399,
+              715.992385,
+              715.702721
+            ]
+          },
+          {
+            "batch_wall_ms": 830.168186,
+            "process_cpu_ms": 9330.416,
+            "process_cpu_ms_per_blob": 777.5346666666666,
+            "aggregate_mib_per_second": 3700.454982263076,
+            "individual_blob_latency_ms": [
+              773.852717,
+              771.899536,
+              830.12421,
+              772.01342,
+              803.927087,
+              811.972941,
+              778.018486,
+              746.783384,
+              772.017172,
+              775.633179,
+              745.590922,
+              740.372746
+            ]
+          }
+        ]
+      },
+      "independent_instances": 12
+    },
+    {
+      "name": "three8",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 2,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 3,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 3,
+            "NUMANode": 0,
+            "PCI": "3d:01.1"
+          }
+        },
+        {
+          "worker": 4,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 4,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 5,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 5,
+            "NUMANode": 0,
+            "PCI": "3d:01.2"
+          }
+        },
+        {
+          "worker": 6,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 6,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        },
+        {
+          "worker": 7,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 7,
+            "NUMANode": 0,
+            "PCI": "3d:01.3"
+          }
+        },
+        {
+          "worker": 8,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 32,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 9,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 33,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 10,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 34,
+            "NUMANode": 0,
+            "PCI": "3f:01.1"
+          }
+        },
+        {
+          "worker": 11,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 35,
+            "NUMANode": 0,
+            "PCI": "3f:01.1"
+          }
+        },
+        {
+          "worker": 12,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 36,
+            "NUMANode": 0,
+            "PCI": "3f:01.2"
+          }
+        },
+        {
+          "worker": 13,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 37,
+            "NUMANode": 0,
+            "PCI": "3f:01.2"
+          }
+        },
+        {
+          "worker": 14,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 38,
+            "NUMANode": 0,
+            "PCI": "3f:01.3"
+          }
+        },
+        {
+          "worker": 15,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 39,
+            "NUMANode": 0,
+            "PCI": "3f:01.3"
+          }
+        },
+        {
+          "worker": 16,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 64,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        },
+        {
+          "worker": 17,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 65,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        },
+        {
+          "worker": 18,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 66,
+            "NUMANode": 0,
+            "PCI": "41:01.1"
+          }
+        },
+        {
+          "worker": 19,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 67,
+            "NUMANode": 0,
+            "PCI": "41:01.1"
+          }
+        },
+        {
+          "worker": 20,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 68,
+            "NUMANode": 0,
+            "PCI": "41:01.2"
+          }
+        },
+        {
+          "worker": 21,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 69,
+            "NUMANode": 0,
+            "PCI": "41:01.2"
+          }
+        },
+        {
+          "worker": 22,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 70,
+            "NUMANode": 0,
+            "PCI": "41:01.3"
+          }
+        },
+        {
+          "worker": 23,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 71,
+            "NUMANode": 0,
+            "PCI": "41:01.3"
+          }
+        }
+      ],
+      "payload_bytes": 6442450944,
+      "qat": {
+        "mean_batch_wall_ms": 480.140953,
+        "median_batch_wall_ms": 483.99461,
+        "mean_process_cpu_ms": 483.7676666666666,
+        "mean_process_cpu_ms_per_blob": 20.15698611111111,
+        "aggregate_mib_per_second": 12796.242356773095,
+        "mean_individual_blob_latency_ms": 471.2813511111113,
+        "max_individual_blob_latency_ms": 484.261871,
+        "samples": [
+          {
+            "batch_wall_ms": 483.99461,
+            "process_cpu_ms": 540.698,
+            "process_cpu_ms_per_blob": 22.529083333333332,
+            "aggregate_mib_per_second": 12694.356245000332,
+            "individual_blob_latency_ms": [
+              465.720508,
+              466.080736,
+              476.24446,
+              473.133418,
+              468.616511,
+              476.75975,
+              465.681264,
+              479.027487,
+              467.222143,
+              464.77327,
+              468.711471,
+              483.870049,
+              465.284674,
+              477.251304,
+              476.358092,
+              465.392709,
+              477.173736,
+              467.01413,
+              476.153266,
+              474.786106,
+              480.685806,
+              475.525002,
+              475.749134,
+              468.593413
+            ]
+          },
+          {
+            "batch_wall_ms": 484.499687,
+            "process_cpu_ms": 351.635,
+            "process_cpu_ms_per_blob": 14.651458333333332,
+            "aggregate_mib_per_second": 12681.122743429141,
+            "individual_blob_latency_ms": [
+              477.912329,
+              477.706952,
+              471.100849,
+              470.586753,
+              471.149928,
+              471.272323,
+              477.97142,
+              477.597094,
+              476.527007,
+              469.346754,
+              470.59514,
+              476.208835,
+              484.261871,
+              483.353544,
+              470.64532,
+              477.103668,
+              477.447421,
+              469.337138,
+              470.407885,
+              471.467993,
+              468.544834,
+              471.092073,
+              471.527889,
+              470.376824
+            ]
+          },
+          {
+            "batch_wall_ms": 471.928562,
+            "process_cpu_ms": 558.97,
+            "process_cpu_ms_per_blob": 23.29041666666667,
+            "aggregate_mib_per_second": 13018.919588087996,
+            "individual_blob_latency_ms": [
+              469.880142,
+              466.249419,
+              471.769993,
+              466.236214,
+              468.351482,
+              468.504321,
+              466.254899,
+              466.98354,
+              471.20725,
+              467.474553,
+              467.549792,
+              466.647568,
+              466.944509,
+              469.154735,
+              466.040405,
+              467.467734,
+              466.954949,
+              468.371104,
+              466.262734,
+              467.280876,
+              466.043474,
+              465.684466,
+              469.44546,
+              466.147378
+            ]
+          }
+        ]
+      },
+      "cpu": {
+        "mean_batch_wall_ms": 1275.9669999999999,
+        "median_batch_wall_ms": 1294.985329,
+        "mean_process_cpu_ms": 28341.99266666667,
+        "mean_process_cpu_ms_per_blob": 1180.9163611111114,
+        "aggregate_mib_per_second": 4815.171552242339,
+        "mean_individual_blob_latency_ms": 1180.5722695416669,
+        "max_individual_blob_latency_ms": 1301.973735,
+        "samples": [
+          {
+            "batch_wall_ms": 1302.341218,
+            "process_cpu_ms": 29182.453,
+            "process_cpu_ms_per_blob": 1215.9355416666667,
+            "aggregate_mib_per_second": 4717.657642315365,
+            "individual_blob_latency_ms": [
+              1182.542516,
+              1075.951106,
+              1246.939702,
+              1266.399108,
+              1291.159035,
+              1173.126041,
+              1041.911317,
+              1280.857704,
+              1289.145666,
+              1250.257664,
+              1301.973735,
+              1154.530097,
+              1285.735619,
+              1258.176404,
+              1226.145864,
+              1176.75051,
+              1253.028334,
+              1215.997748,
+              1168.087178,
+              1274.50108,
+              1188.072129,
+              1094.959554,
+              1173.824787,
+              1299.378647
+            ]
+          },
+          {
+            "batch_wall_ms": 1230.574453,
+            "process_cpu_ms": 27289.271,
+            "process_cpu_ms_per_blob": 1137.0529583333334,
+            "aggregate_mib_per_second": 4992.790143677718,
+            "individual_blob_latency_ms": [
+              1156.651544,
+              1013.61069,
+              1161.745725,
+              1098.195325,
+              1138.896562,
+              1188.504522,
+              1128.501669,
+              1150.055002,
+              1050.980614,
+              1169.602747,
+              1185.03052,
+              1048.965677,
+              1186.971744,
+              1212.410362,
+              1083.384797,
+              1161.997525,
+              1190.390704,
+              1175.550325,
+              1167.144414,
+              914.951623,
+              1183.418212,
+              1230.511809,
+              1115.907508,
+              1164.824177
+            ]
+          },
+          {
+            "batch_wall_ms": 1294.985329,
+            "process_cpu_ms": 28554.254,
+            "process_cpu_ms_per_blob": 1189.7605833333334,
+            "aggregate_mib_per_second": 4744.45529413407,
+            "individual_blob_latency_ms": [
+              1159.851117,
+              1275.144606,
+              1019.972355,
+              1224.198819,
+              1151.004116,
+              1193.207514,
+              1257.891115,
+              1256.537828,
+              1104.9693,
+              1230.344065,
+              1082.764731,
+              1255.20386,
+              1194.439125,
+              985.515449,
+              1154.705114,
+              1220.427919,
+              1228.698086,
+              1190.274311,
+              1294.478365,
+              1248.463737,
+              1212.697671,
+              1266.554913,
+              1178.767399,
+              1167.43655
+            ]
+          }
+        ]
+      },
+      "independent_instances": 24
+    }
+  ],
+  "benchmark_cpu_affinity": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42,
+    44,
+    46,
+    48,
+    50,
+    52,
+    54
+  ]
+}

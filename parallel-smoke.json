@@ -1,0 +1,171 @@
+{
+  "generated_utc": "2026-11-21T05:26:16.203772677Z",
+  "go_version": "go1.27.4",
+  "gomaxprocs": 6,
+  "bytes_per_blob": 67108864,
+  "measured_batches_per_backend": 1,
+  "warmup_batches_per_backend": 0,
+  "poll_us": 250,
+  "allocation_bytes": 4194304,
+  "request_bytes": 4194304,
+  "sha256": "6286195bd78da7069d7c86ad3e2a3815b4520e80d151c36ca8067148a2e11a41",
+  "all_digests_verified": true,
+  "measurement_notes": [
+    "Resident-data benchmark: buffer allocation, fill, page first touch, engine initialization, session creation and cleanup are outside timed batches.",
+    "Every worker owns one independent contiguous DMA buffer and digest state. Shared3 intentionally uses three streams on one serialized engine.",
+    "QAT batch timing includes synchronized start, submission and Finish completion; individual latencies start when each worker is scheduled.",
+    "Process CPU time is measured once around the whole batch, across all process threads. Digest verification is outside timing.",
+    "CPU baselines use the same resident buffers; duplicate worker counts reference the first measured case with that count, which can have different PCI/NUMA placement.",
+    "Cases are sequential; all buffers and engines close before the next case. Largest default case holds 3 GiB payload; optional three8 holds 6 GiB, plus allocator overhead.",
+    "Host-specific presets require crypto indexes 0..31 on PCI bus 3d, 32..63 on 3f and 64..95 on 41; mappings are checked before timing.",
+    "Independent instance counts refer to software Engine handles/crypto channels, not physical compute engines; the result label was clarified after measurement without changing timing data."
+  ],
+  "cases": [
+    {
+      "name": "single",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 67108864,
+      "qat": {
+        "mean_batch_wall_ms": 111.220136,
+        "median_batch_wall_ms": 111.220136,
+        "mean_process_cpu_ms": 5.431,
+        "mean_process_cpu_ms_per_blob": 5.431,
+        "aggregate_mib_per_second": 575.4353690054829,
+        "mean_individual_blob_latency_ms": 111.210699,
+        "max_individual_blob_latency_ms": 111.210699,
+        "samples": [
+          {
+            "batch_wall_ms": 111.220136,
+            "process_cpu_ms": 5.431,
+            "process_cpu_ms_per_blob": 5.431,
+            "aggregate_mib_per_second": 575.4353690054829,
+            "individual_blob_latency_ms": [
+              111.210699
+            ]
+          }
+        ]
+      },
+      "independent_instances": 1
+    },
+    {
+      "name": "one2",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 1,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 134217728,
+      "qat": {
+        "mean_batch_wall_ms": 111.828363,
+        "median_batch_wall_ms": 111.828363,
+        "mean_process_cpu_ms": 10.308,
+        "mean_process_cpu_ms_per_blob": 5.154,
+        "aggregate_mib_per_second": 1144.6112289062123,
+        "mean_individual_blob_latency_ms": 111.5241265,
+        "max_individual_blob_latency_ms": 111.825806,
+        "samples": [
+          {
+            "batch_wall_ms": 111.828363,
+            "process_cpu_ms": 10.308,
+            "process_cpu_ms_per_blob": 5.154,
+            "aggregate_mib_per_second": 1144.6112289062123,
+            "individual_blob_latency_ms": [
+              111.222447,
+              111.825806
+            ]
+          }
+        ]
+      },
+      "independent_instances": 2
+    },
+    {
+      "name": "three1",
+      "workers": [
+        {
+          "worker": 0,
+          "expected_pci_bus": "3d",
+          "device": {
+            "Instance": 0,
+            "NUMANode": 0,
+            "PCI": "3d:01.0"
+          }
+        },
+        {
+          "worker": 1,
+          "expected_pci_bus": "3f",
+          "device": {
+            "Instance": 32,
+            "NUMANode": 0,
+            "PCI": "3f:01.0"
+          }
+        },
+        {
+          "worker": 2,
+          "expected_pci_bus": "41",
+          "device": {
+            "Instance": 64,
+            "NUMANode": 0,
+            "PCI": "41:01.0"
+          }
+        }
+      ],
+      "payload_bytes": 201326592,
+      "qat": {
+        "mean_batch_wall_ms": 113.408637,
+        "median_batch_wall_ms": 113.408637,
+        "mean_process_cpu_ms": 16.666,
+        "mean_process_cpu_ms_per_blob": 5.5553333333333335,
+        "aggregate_mib_per_second": 1692.9927479862051,
+        "mean_individual_blob_latency_ms": 112.39632433333333,
+        "max_individual_blob_latency_ms": 113.405146,
+        "samples": [
+          {
+            "batch_wall_ms": 113.408637,
+            "process_cpu_ms": 16.666,
+            "process_cpu_ms_per_blob": 5.5553333333333335,
+            "aggregate_mib_per_second": 1692.992747986205,
+            "individual_blob_latency_ms": [
+              113.405146,
+              111.748001,
+              112.035826
+            ]
+          }
+        ]
+      },
+      "independent_instances": 3
+    }
+  ],
+  "benchmark_cpu_affinity": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10
+  ]
+}

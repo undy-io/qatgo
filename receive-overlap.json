@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-21T05:29:48.277655334Z",
+  "go_version": "go1.27.4",
+  "blob_bytes": 268435456,
+  "iterations": 3,
+  "warmup": 1,
+  "simulated_receive_rate_mib_per_second": 0,
+  "serial_receive_control": false,
+  "sha256": "ad393ddd80e45166dff61eb09641bddbd2e4df8fff9ce4b7b6516dda4d580cdb",
+  "all_digests_verified": true,
+  "measurement_notes": [
+    "Every lease exposes one contiguous C-allocated DMA-backed byte slice of blob_bytes; physical allocations can be disjoint.",
+    "Resident wall time includes Submit and Finish; allocation, deterministic fill, session creation and verification are excluded.",
+    "CPU uses Go crypto/sha256 and its normal CPU instruction acceleration; no QAT fallback is used.",
+    "Process CPU is getrusage(RUSAGE_SELF) user+system and includes native workers and Go runtime activity.",
+    "Receive simulation writes into successive disjoint ranges of the same full-blob lease; submitted prefixes are not modified while QAT reads them.",
+    "Receive timings include pacing and synthetic writes; rate=0 means unpaced. CPU receive control hashes each received range synchronously.",
+    "The tuning shortlist is staged, not an exhaustive parameter search; fastest means fastest measured in this run."
+  ],
+  "measurements": [
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 250,
+        "receive_chunk_bytes": 4194304
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 1,
+      "cpu_go_sha256": {
+        "mean_ms": 734.703433,
+        "median_ms": 717.150127,
+        "min_ms": 714.919007,
+        "max_ms": 772.041165,
+        "mean_process_cpu_ms": 736.583,
+        "mib_per_second": 348.4399126252619,
+        "samples": [
+          {
+            "wall_ms": 772.041165,
+            "process_cpu_ms": 773.764
+          },
+          {
+            "wall_ms": 714.919007,
+            "process_cpu_ms": 716.697
+          },
+          {
+            "wall_ms": 717.150127,
+            "process_cpu_ms": 719.288
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 441.4651236666667,
+        "median_ms": 441.053855,
+        "min_ms": 440.870387,
+        "max_ms": 442.471129,
+        "mean_process_cpu_ms": 20.500333333333334,
+        "mib_per_second": 579.8872578511904,
+        "samples": [
+          {
+            "wall_ms": 440.870387,
+            "process_cpu_ms": 23.533
+          },
+          {
+            "wall_ms": 442.471129,
+            "process_cpu_ms": 18.028
+          },
+          {
+            "wall_ms": 441.053855,
+            "process_cpu_ms": 19.94
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6642389027196318,
+      "simulated_receive_cpu": {
+        "mean_ms": 797.1088420000001,
+        "median_ms": 814.633083,
+        "min_ms": 759.845894,
+        "max_ms": 816.847549,
+        "mean_process_cpu_ms": 799.873,
+        "mib_per_second": 321.1606577561963,
+        "samples": [
+          {
+            "wall_ms": 816.847549,
+            "process_cpu_ms": 819.621
+          },
+          {
+            "wall_ms": 759.845894,
+            "process_cpu_ms": 762.603
+          },
+          {
+            "wall_ms": 814.633083,
+            "process_cpu_ms": 817.395
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 445.3377803333333,
+        "median_ms": 444.308522,
+        "min_ms": 442.642538,
+        "max_ms": 449.062281,
+        "mean_process_cpu_ms": 88.28133333333334,
+        "mib_per_second": 574.844559130791,
+        "samples": [
+          {
+            "wall_ms": 444.308522,
+            "process_cpu_ms": 90.031
+          },
+          {
+            "wall_ms": 449.062281,
+            "process_cpu_ms": 84.771
+          },
+          {
+            "wall_ms": 442.642538,
+            "process_cpu_ms": 90.042
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.789897190854474,
+      "receive_ranges_per_blob": 64,
+      "effective_request_max_bytes": 4194304
+    }
+  ],
+  "best_resident_measurement_index": 0,
+  "best_receive_measurement_index": 0
+}

@@ -1,0 +1,9 @@
+/qatbench
+/hashstdin
+/qatalloc
+/qatparallel
+/qatgo.test
+/qatgo-race.test
+
+# Local diagnostics can include host-specific kernel output.
+*.log

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-21T01:06:51.505578537Z",
+  "go_version": "go1.27.4",
+  "blob_bytes": 268435456,
+  "iterations": 5,
+  "warmup": 1,
+  "simulated_receive_rate_mib_per_second": 0,
+  "serial_receive_control": false,
+  "sha256": "ad393ddd80e45166dff61eb09641bddbd2e4df8fff9ce4b7b6516dda4d580cdb",
+  "all_digests_verified": true,
+  "measurement_notes": [
+    "Every lease exposes one contiguous C-allocated DMA-backed byte slice of blob_bytes; physical allocations can be disjoint.",
+    "Resident wall time includes Submit and Finish; allocation, deterministic fill, session creation and verification are excluded.",
+    "CPU uses Go crypto/sha256 and its normal CPU instruction acceleration; no QAT fallback is used.",
+    "Process CPU is getrusage(RUSAGE_SELF) user+system and includes native workers and Go runtime activity.",
+    "Receive simulation writes into successive disjoint ranges of the same full-blob lease; submitted prefixes are not modified while QAT reads them.",
+    "Receive timings include pacing and synthetic writes; rate=0 means unpaced. CPU receive control hashes each received range synchronously.",
+    "The tuning shortlist is staged, not an exhaustive parameter search; fastest means fastest measured in this run."
+  ],
+  "measurements": [
+    {
+      "config": {
+        "request_bytes": 2097152,
+        "allocation_bytes": 2097152,
+        "poll_us": 250,
+        "receive_chunk_bytes": 2097152
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 1,
+      "cpu_go_sha256": {
+        "mean_ms": 739.2836068,
+        "median_ms": 716.966296,
+        "min_ms": 714.680735,
+        "max_ms": 777.003416,
+        "mean_process_cpu_ms": 741.3900000000001,
+        "mib_per_second": 346.281180382316,
+        "samples": [
+          {
+            "wall_ms": 771.466504,
+            "process_cpu_ms": 774.206
+          },
+          {
+            "wall_ms": 714.680735,
+            "process_cpu_ms": 716.681
+          },
+          {
+            "wall_ms": 716.301083,
+            "process_cpu_ms": 717.933
+          },
+          {
+            "wall_ms": 716.966296,
+            "process_cpu_ms": 718.478
+          },
+          {
+            "wall_ms": 777.003416,
+            "process_cpu_ms": 779.652
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 445.3135704,
+        "median_ms": 444.230082,
+        "min_ms": 442.248959,
+        "max_ms": 450.759843,
+        "mean_process_cpu_ms": 25.61,
+        "mib_per_second": 574.8758111504432,
+        "samples": [
+          {
+            "wall_ms": 442.248959,
+            "process_cpu_ms": 25.097
+          },
+          {
+            "wall_ms": 450.759843,
+            "process_cpu_ms": 25.786
+          },
+          {
+            "wall_ms": 445.107125,
+            "process_cpu_ms": 26.078
+          },
+          {
+            "wall_ms": 444.221843,
+            "process_cpu_ms": 26.248
+          },
+          {
+            "wall_ms": 444.230082,
+            "process_cpu_ms": 24.841
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6601416528491224,
+      "simulated_receive_cpu": {
+        "mean_ms": 780.404536,
+        "median_ms": 799.863138,
+        "min_ms": 744.697964,
+        "max_ms": 806.297272,
+        "mean_process_cpu_ms": 782.5068,
+        "mib_per_second": 328.0349974798199,
+        "samples": [
+          {
+            "wall_ms": 799.863138,
+            "process_cpu_ms": 801.872
+          },
+          {
+            "wall_ms": 806.297272,
+            "process_cpu_ms": 808.783
+          },
+          {
+            "wall_ms": 744.697964,
+            "process_cpu_ms": 746.248
+          },
+          {
+            "wall_ms": 801.642271,
+            "process_cpu_ms": 804.428
+          },
+          {
+            "wall_ms": 749.522035,
+            "process_cpu_ms": 751.203
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 452.7469794,
+        "median_ms": 453.650487,
+        "min_ms": 447.647236,
+        "max_ms": 455.060714,
+        "mean_process_cpu_ms": 75.4682,
+        "mib_per_second": 565.4372345879864,
+        "samples": [
+          {
+            "wall_ms": 447.647236,
+            "process_cpu_ms": 80.077
+          },
+          {
+            "wall_ms": 455.060714,
+            "process_cpu_ms": 76.644
+          },
+          {
+            "wall_ms": 452.915923,
+            "process_cpu_ms": 66.145
+          },
+          {
+            "wall_ms": 454.460537,
+            "process_cpu_ms": 75.873
+          },
+          {
+            "wall_ms": 453.650487,
+            "process_cpu_ms": 78.602
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.723710088655315,
+      "receive_ranges_per_blob": 128,
+      "effective_request_max_bytes": 2097152
+    }
+  ],
+  "best_resident_measurement_index": 0,
+  "best_receive_measurement_index": 0
+}

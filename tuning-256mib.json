@@ -1,0 +1,1040 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-21T01:03:03.321887438Z",
+  "go_version": "go1.27.4",
+  "blob_bytes": 268435456,
+  "iterations": 3,
+  "warmup": 1,
+  "simulated_receive_rate_mib_per_second": 0,
+  "serial_receive_control": false,
+  "sha256": "ad393ddd80e45166dff61eb09641bddbd2e4df8fff9ce4b7b6516dda4d580cdb",
+  "all_digests_verified": true,
+  "measurement_notes": [
+    "Every lease exposes one contiguous C-allocated DMA-backed byte slice of blob_bytes; physical allocations can be disjoint.",
+    "Resident wall time includes Submit and Finish; allocation, deterministic fill, session creation and verification are excluded.",
+    "CPU uses Go crypto/sha256 and its normal CPU instruction acceleration; no QAT fallback is used.",
+    "Process CPU is getrusage(RUSAGE_SELF) user+system and includes native workers and Go runtime activity.",
+    "Receive simulation writes into successive disjoint ranges of the same full-blob lease; submitted prefixes are not modified while QAT reads them.",
+    "Receive timings include pacing and synthetic writes; rate=0 means unpaced. CPU receive control hashes each received range synchronously.",
+    "The tuning shortlist is staged, not an exhaustive parameter search; fastest means fastest measured in this run."
+  ],
+  "measurements": [
+    {
+      "config": {
+        "request_bytes": 65536,
+        "allocation_bytes": 2097152,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 716.1099340000001,
+        "median_ms": 714.240668,
+        "min_ms": 714.072393,
+        "max_ms": 720.016741,
+        "mean_process_cpu_ms": 718.3576666666667,
+        "mib_per_second": 357.4870112051817,
+        "samples": [
+          {
+            "wall_ms": 714.072393,
+            "process_cpu_ms": 716.623
+          },
+          {
+            "wall_ms": 714.240668,
+            "process_cpu_ms": 716.02
+          },
+          {
+            "wall_ms": 720.016741,
+            "process_cpu_ms": 722.43
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 476.77197800000005,
+        "median_ms": 476.278664,
+        "min_ms": 476.016087,
+        "max_ms": 478.021183,
+        "mean_process_cpu_ms": 583.2686666666666,
+        "mib_per_second": 536.9443084173877,
+        "samples": [
+          {
+            "wall_ms": 476.278664,
+            "process_cpu_ms": 554.551
+          },
+          {
+            "wall_ms": 476.016087,
+            "process_cpu_ms": 596.171
+          },
+          {
+            "wall_ms": 478.021183,
+            "process_cpu_ms": 599.084
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.5019966924314498,
+      "effective_request_max_bytes": 65536
+    },
+    {
+      "config": {
+        "request_bytes": 262144,
+        "allocation_bytes": 2097152,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 714.6941146666667,
+        "median_ms": 714.581685,
+        "min_ms": 714.460414,
+        "max_ms": 715.040245,
+        "mean_process_cpu_ms": 716.8853333333333,
+        "mib_per_second": 358.19519812248404,
+        "samples": [
+          {
+            "wall_ms": 714.460414,
+            "process_cpu_ms": 716.727
+          },
+          {
+            "wall_ms": 714.581685,
+            "process_cpu_ms": 716.427
+          },
+          {
+            "wall_ms": 715.040245,
+            "process_cpu_ms": 717.502
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 446.32761700000003,
+        "median_ms": 446.440903,
+        "min_ms": 445.74914,
+        "max_ms": 446.792808,
+        "mean_process_cpu_ms": 482.735,
+        "mib_per_second": 573.5697058602582,
+        "samples": [
+          {
+            "wall_ms": 445.74914,
+            "process_cpu_ms": 484.28
+          },
+          {
+            "wall_ms": 446.440903,
+            "process_cpu_ms": 481.309
+          },
+          {
+            "wall_ms": 446.792808,
+            "process_cpu_ms": 482.616
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6012769262867876,
+      "effective_request_max_bytes": 262144
+    },
+    {
+      "config": {
+        "request_bytes": 1048576,
+        "allocation_bytes": 2097152,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 727.8267936666667,
+        "median_ms": 719.728841,
+        "min_ms": 719.438681,
+        "max_ms": 744.312859,
+        "mean_process_cpu_ms": 729.6916666666666,
+        "mib_per_second": 351.7320360113645,
+        "samples": [
+          {
+            "wall_ms": 744.312859,
+            "process_cpu_ms": 746.194
+          },
+          {
+            "wall_ms": 719.728841,
+            "process_cpu_ms": 721.286
+          },
+          {
+            "wall_ms": 719.438681,
+            "process_cpu_ms": 721.595
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 438.2123,
+        "median_ms": 438.258242,
+        "min_ms": 438.114258,
+        "max_ms": 438.2644,
+        "mean_process_cpu_ms": 448.44966666666664,
+        "mib_per_second": 584.1917262477571,
+        "samples": [
+          {
+            "wall_ms": 438.114258,
+            "process_cpu_ms": 449.051
+          },
+          {
+            "wall_ms": 438.258242,
+            "process_cpu_ms": 448.244
+          },
+          {
+            "wall_ms": 438.2644,
+            "process_cpu_ms": 448.054
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6608999648496099,
+      "effective_request_max_bytes": 1048576
+    },
+    {
+      "config": {
+        "request_bytes": 2097152,
+        "allocation_bytes": 2097152,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 714.9707426666668,
+        "median_ms": 715.16101,
+        "min_ms": 714.411492,
+        "max_ms": 715.339726,
+        "mean_process_cpu_ms": 716.7896666666667,
+        "mib_per_second": 358.0566094847215,
+        "samples": [
+          {
+            "wall_ms": 714.411492,
+            "process_cpu_ms": 716.384
+          },
+          {
+            "wall_ms": 715.339726,
+            "process_cpu_ms": 717.114
+          },
+          {
+            "wall_ms": 715.16101,
+            "process_cpu_ms": 716.871
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.79483799999997,
+        "median_ms": 436.769438,
+        "min_ms": 436.758912,
+        "max_ms": 436.856164,
+        "mean_process_cpu_ms": 441.8833333333333,
+        "mib_per_second": 586.087512325409,
+        "samples": [
+          {
+            "wall_ms": 436.856164,
+            "process_cpu_ms": 441.75
+          },
+          {
+            "wall_ms": 436.758912,
+            "process_cpu_ms": 442.309
+          },
+          {
+            "wall_ms": 436.769438,
+            "process_cpu_ms": 441.591
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6368571248240502,
+      "effective_request_max_bytes": 2097152
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 733.538116,
+        "median_ms": 715.293501,
+        "min_ms": 713.552743,
+        "max_ms": 771.768104,
+        "mean_process_cpu_ms": 735.572,
+        "mib_per_second": 348.9934529864294,
+        "samples": [
+          {
+            "wall_ms": 771.768104,
+            "process_cpu_ms": 773.85
+          },
+          {
+            "wall_ms": 713.552743,
+            "process_cpu_ms": 715.411
+          },
+          {
+            "wall_ms": 715.293501,
+            "process_cpu_ms": 717.455
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.13071233333335,
+        "median_ms": 436.085776,
+        "min_ms": 436.068765,
+        "max_ms": 436.237596,
+        "mean_process_cpu_ms": 438.399,
+        "mib_per_second": 586.9799873308166,
+        "samples": [
+          {
+            "wall_ms": 436.237596,
+            "process_cpu_ms": 438.664
+          },
+          {
+            "wall_ms": 436.068765,
+            "process_cpu_ms": 438.446
+          },
+          {
+            "wall_ms": 436.085776,
+            "process_cpu_ms": 438.087
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.681922632954496,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 2097152,
+        "poll_us": 0
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 758.2471063333332,
+        "median_ms": 777.700913,
+        "min_ms": 718.997123,
+        "max_ms": 778.043283,
+        "mean_process_cpu_ms": 759.9783333333332,
+        "mib_per_second": 337.6208070716458,
+        "samples": [
+          {
+            "wall_ms": 778.043283,
+            "process_cpu_ms": 779.768
+          },
+          {
+            "wall_ms": 718.997123,
+            "process_cpu_ms": 720.58
+          },
+          {
+            "wall_ms": 777.700913,
+            "process_cpu_ms": 779.587
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.791156,
+        "median_ms": 436.774673,
+        "min_ms": 436.770457,
+        "max_ms": 436.828338,
+        "mean_process_cpu_ms": 442.14733333333334,
+        "mib_per_second": 586.092452842612,
+        "samples": [
+          {
+            "wall_ms": 436.770457,
+            "process_cpu_ms": 442.292
+          },
+          {
+            "wall_ms": 436.828338,
+            "process_cpu_ms": 442.106
+          },
+          {
+            "wall_ms": 436.774673,
+            "process_cpu_ms": 442.044
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.7359488531707663,
+      "effective_request_max_bytes": 2097152
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 50
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 751.5318729999999,
+        "median_ms": 768.004952,
+        "min_ms": 714.389741,
+        "max_ms": 772.200926,
+        "mean_process_cpu_ms": 753.3343333333333,
+        "mib_per_second": 340.6375819805051,
+        "samples": [
+          {
+            "wall_ms": 768.004952,
+            "process_cpu_ms": 770.382
+          },
+          {
+            "wall_ms": 714.389741,
+            "process_cpu_ms": 715.956
+          },
+          {
+            "wall_ms": 772.200926,
+            "process_cpu_ms": 773.665
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 440.76646999999997,
+        "median_ms": 440.916247,
+        "min_ms": 440.352704,
+        "max_ms": 441.030459,
+        "mean_process_cpu_ms": 46.007333333333335,
+        "mib_per_second": 580.8064302168901,
+        "samples": [
+          {
+            "wall_ms": 440.916247,
+            "process_cpu_ms": 51.381
+          },
+          {
+            "wall_ms": 440.352704,
+            "process_cpu_ms": 37.059
+          },
+          {
+            "wall_ms": 441.030459,
+            "process_cpu_ms": 49.582
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.7050568138724345,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 250
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 731.5798836666667,
+        "median_ms": 713.806749,
+        "min_ms": 710.806049,
+        "max_ms": 770.126853,
+        "mean_process_cpu_ms": 733.5913333333333,
+        "mib_per_second": 349.9276097053572,
+        "samples": [
+          {
+            "wall_ms": 770.126853,
+            "process_cpu_ms": 772.456
+          },
+          {
+            "wall_ms": 713.806749,
+            "process_cpu_ms": 715.319
+          },
+          {
+            "wall_ms": 710.806049,
+            "process_cpu_ms": 712.999
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 441.60010966666664,
+        "median_ms": 441.557136,
+        "min_ms": 440.727986,
+        "max_ms": 442.515207,
+        "mean_process_cpu_ms": 20.94066666666667,
+        "mib_per_second": 579.7100009627187,
+        "samples": [
+          {
+            "wall_ms": 440.727986,
+            "process_cpu_ms": 20.463
+          },
+          {
+            "wall_ms": 442.515207,
+            "process_cpu_ms": 21.001
+          },
+          {
+            "wall_ms": 441.557136,
+            "process_cpu_ms": 21.358
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6566569338465194,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0,
+        "receive_chunk_bytes": 65536
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 733.3851430000001,
+        "median_ms": 714.025738,
+        "min_ms": 713.942303,
+        "max_ms": 772.187388,
+        "mean_process_cpu_ms": 735.452,
+        "mib_per_second": 349.06624771917416,
+        "samples": [
+          {
+            "wall_ms": 713.942303,
+            "process_cpu_ms": 716.325
+          },
+          {
+            "wall_ms": 714.025738,
+            "process_cpu_ms": 715.779
+          },
+          {
+            "wall_ms": 772.187388,
+            "process_cpu_ms": 774.252
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.1774056666667,
+        "median_ms": 436.212385,
+        "min_ms": 436.085229,
+        "max_ms": 436.234603,
+        "mean_process_cpu_ms": 438.16433333333333,
+        "mib_per_second": 586.9171503937071,
+        "samples": [
+          {
+            "wall_ms": 436.085229,
+            "process_cpu_ms": 436.427
+          },
+          {
+            "wall_ms": 436.234603,
+            "process_cpu_ms": 439.219
+          },
+          {
+            "wall_ms": 436.212385,
+            "process_cpu_ms": 438.847
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.681391868244693,
+      "simulated_receive_cpu": {
+        "mean_ms": 738.973204,
+        "median_ms": 738.928763,
+        "min_ms": 738.783772,
+        "max_ms": 739.207077,
+        "mean_process_cpu_ms": 741.037,
+        "mib_per_second": 346.42663443585434,
+        "samples": [
+          {
+            "wall_ms": 739.207077,
+            "process_cpu_ms": 741.145
+          },
+          {
+            "wall_ms": 738.783772,
+            "process_cpu_ms": 741.287
+          },
+          {
+            "wall_ms": 738.928763,
+            "process_cpu_ms": 740.679
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 486.9070423333334,
+        "median_ms": 486.462401,
+        "min_ms": 485.215401,
+        "max_ms": 489.043325,
+        "mean_process_cpu_ms": 588.7449999999999,
+        "mib_per_second": 525.7677087051537,
+        "samples": [
+          {
+            "wall_ms": 485.215401,
+            "process_cpu_ms": 598.597
+          },
+          {
+            "wall_ms": 486.462401,
+            "process_cpu_ms": 583.958
+          },
+          {
+            "wall_ms": 489.043325,
+            "process_cpu_ms": 583.68
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.517688469771821,
+      "receive_ranges_per_blob": 4096,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0,
+        "receive_chunk_bytes": 262144
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 755.7288776666667,
+        "median_ms": 772.509513,
+        "min_ms": 714.63271,
+        "max_ms": 780.04441,
+        "mean_process_cpu_ms": 757.7006666666667,
+        "mib_per_second": 338.7458221662866,
+        "samples": [
+          {
+            "wall_ms": 772.509513,
+            "process_cpu_ms": 774.469
+          },
+          {
+            "wall_ms": 714.63271,
+            "process_cpu_ms": 716.351
+          },
+          {
+            "wall_ms": 780.04441,
+            "process_cpu_ms": 782.282
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.0714303333333,
+        "median_ms": 436.077889,
+        "min_ms": 436.057698,
+        "max_ms": 436.078704,
+        "mean_process_cpu_ms": 438.75199999999995,
+        "mib_per_second": 587.0597846878284,
+        "samples": [
+          {
+            "wall_ms": 436.077889,
+            "process_cpu_ms": 438.662
+          },
+          {
+            "wall_ms": 436.057698,
+            "process_cpu_ms": 438.529
+          },
+          {
+            "wall_ms": 436.078704,
+            "process_cpu_ms": 439.065
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.733039188302217,
+      "simulated_receive_cpu": {
+        "mean_ms": 769.101712,
+        "median_ms": 774.913219,
+        "min_ms": 738.916174,
+        "max_ms": 793.475743,
+        "mean_process_cpu_ms": 771.1733333333334,
+        "mib_per_second": 332.8558446896293,
+        "samples": [
+          {
+            "wall_ms": 793.475743,
+            "process_cpu_ms": 795.326
+          },
+          {
+            "wall_ms": 738.916174,
+            "process_cpu_ms": 741.253
+          },
+          {
+            "wall_ms": 774.913219,
+            "process_cpu_ms": 776.941
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 450.0898896666667,
+        "median_ms": 449.86262,
+        "min_ms": 449.742137,
+        "max_ms": 450.664912,
+        "mean_process_cpu_ms": 531.4590000000001,
+        "mib_per_second": 568.7752732895017,
+        "samples": [
+          {
+            "wall_ms": 450.664912,
+            "process_cpu_ms": 521.103
+          },
+          {
+            "wall_ms": 449.742137,
+            "process_cpu_ms": 543.574
+          },
+          {
+            "wall_ms": 449.86262,
+            "process_cpu_ms": 529.7
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.708773579805561,
+      "receive_ranges_per_blob": 1024,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0,
+        "receive_chunk_bytes": 1048576
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 716.4935226666666,
+        "median_ms": 714.811048,
+        "min_ms": 714.722178,
+        "max_ms": 719.947342,
+        "mean_process_cpu_ms": 718.8593333333333,
+        "mib_per_second": 357.2956236187756,
+        "samples": [
+          {
+            "wall_ms": 714.811048,
+            "process_cpu_ms": 717.167
+          },
+          {
+            "wall_ms": 714.722178,
+            "process_cpu_ms": 716.638
+          },
+          {
+            "wall_ms": 719.947342,
+            "process_cpu_ms": 722.773
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.0579706666666,
+        "median_ms": 436.058706,
+        "min_ms": 436.053744,
+        "max_ms": 436.061462,
+        "mean_process_cpu_ms": 438.822,
+        "mib_per_second": 587.0779052808385,
+        "samples": [
+          {
+            "wall_ms": 436.053744,
+            "process_cpu_ms": 438.582
+          },
+          {
+            "wall_ms": 436.061462,
+            "process_cpu_ms": 438.93
+          },
+          {
+            "wall_ms": 436.058706,
+            "process_cpu_ms": 438.954
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6431152985720145,
+      "simulated_receive_cpu": {
+        "mean_ms": 741.5685746666667,
+        "median_ms": 741.550157,
+        "min_ms": 741.416143,
+        "max_ms": 741.739424,
+        "mean_process_cpu_ms": 743.931,
+        "mib_per_second": 345.2141969676525,
+        "samples": [
+          {
+            "wall_ms": 741.739424,
+            "process_cpu_ms": 743.959
+          },
+          {
+            "wall_ms": 741.416143,
+            "process_cpu_ms": 744.224
+          },
+          {
+            "wall_ms": 741.550157,
+            "process_cpu_ms": 743.61
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 439.88527766666664,
+        "median_ms": 439.53259,
+        "min_ms": 439.375911,
+        "max_ms": 440.747332,
+        "mean_process_cpu_ms": 505.7826666666666,
+        "mib_per_second": 581.9699203345241,
+        "samples": [
+          {
+            "wall_ms": 439.53259,
+            "process_cpu_ms": 507.114
+          },
+          {
+            "wall_ms": 440.747332,
+            "process_cpu_ms": 501.838
+          },
+          {
+            "wall_ms": 439.375911,
+            "process_cpu_ms": 508.396
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.6858226731302601,
+      "receive_ranges_per_blob": 256,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0,
+        "receive_chunk_bytes": 4194304
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 719.368295,
+        "median_ms": 719.366218,
+        "min_ms": 718.979491,
+        "max_ms": 719.759176,
+        "mean_process_cpu_ms": 721.5426666666667,
+        "mib_per_second": 355.86778257999265,
+        "samples": [
+          {
+            "wall_ms": 719.366218,
+            "process_cpu_ms": 721.772
+          },
+          {
+            "wall_ms": 718.979491,
+            "process_cpu_ms": 720.701
+          },
+          {
+            "wall_ms": 719.759176,
+            "process_cpu_ms": 722.155
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.1320003333333,
+        "median_ms": 436.110458,
+        "min_ms": 436.096068,
+        "max_ms": 436.189475,
+        "mean_process_cpu_ms": 438.8403333333333,
+        "mib_per_second": 586.9782538413614,
+        "samples": [
+          {
+            "wall_ms": 436.110458,
+            "process_cpu_ms": 438.698
+          },
+          {
+            "wall_ms": 436.096068,
+            "process_cpu_ms": 438.657
+          },
+          {
+            "wall_ms": 436.189475,
+            "process_cpu_ms": 439.166
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6494279127653801,
+      "simulated_receive_cpu": {
+        "mean_ms": 800.254598,
+        "median_ms": 815.255743,
+        "min_ms": 764.697193,
+        "max_ms": 820.810858,
+        "mean_process_cpu_ms": 802.76,
+        "mib_per_second": 319.89819319975965,
+        "samples": [
+          {
+            "wall_ms": 764.697193,
+            "process_cpu_ms": 767.292
+          },
+          {
+            "wall_ms": 820.810858,
+            "process_cpu_ms": 823.222
+          },
+          {
+            "wall_ms": 815.255743,
+            "process_cpu_ms": 817.766
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 437.2999346666667,
+        "median_ms": 437.302964,
+        "min_ms": 437.273627,
+        "max_ms": 437.323213,
+        "mean_process_cpu_ms": 519.087,
+        "mib_per_second": 585.4105608205426,
+        "samples": [
+          {
+            "wall_ms": 437.302964,
+            "process_cpu_ms": 517.747
+          },
+          {
+            "wall_ms": 437.273627,
+            "process_cpu_ms": 521.504
+          },
+          {
+            "wall_ms": 437.323213,
+            "process_cpu_ms": 518.01
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.8299902070874918,
+      "receive_ranges_per_blob": 64,
+      "effective_request_max_bytes": 4194304
+    },
+    {
+      "config": {
+        "request_bytes": 4194304,
+        "allocation_bytes": 4194304,
+        "poll_us": 0,
+        "receive_chunk_bytes": 16777216
+      },
+      "device": {
+        "Instance": 0,
+        "NUMANode": 0,
+        "PCI": "3d:01.0"
+      },
+      "contiguous_bytes_per_buffer": 268435456,
+      "pool_buffers": 2,
+      "cpu_go_sha256": {
+        "mean_ms": 717.3315090000001,
+        "median_ms": 718.849404,
+        "min_ms": 713.724932,
+        "max_ms": 719.420191,
+        "mean_process_cpu_ms": 719.6286666666666,
+        "mib_per_second": 356.87823103836354,
+        "samples": [
+          {
+            "wall_ms": 713.724932,
+            "process_cpu_ms": 716.437
+          },
+          {
+            "wall_ms": 718.849404,
+            "process_cpu_ms": 720.567
+          },
+          {
+            "wall_ms": 719.420191,
+            "process_cpu_ms": 721.882
+          }
+        ]
+      },
+      "qat_resident": {
+        "mean_ms": 436.24480933333336,
+        "median_ms": 436.235355,
+        "min_ms": 436.162033,
+        "max_ms": 436.33704,
+        "mean_process_cpu_ms": 439.28633333333335,
+        "mib_per_second": 586.8264665228169,
+        "samples": [
+          {
+            "wall_ms": 436.162033,
+            "process_cpu_ms": 439.885
+          },
+          {
+            "wall_ms": 436.235355,
+            "process_cpu_ms": 438.92
+          },
+          {
+            "wall_ms": 436.33704,
+            "process_cpu_ms": 439.054
+          }
+        ]
+      },
+      "qat_resident_speedup_vs_cpu": 1.6443324794998058,
+      "simulated_receive_cpu": {
+        "mean_ms": 803.5314303333333,
+        "median_ms": 799.142877,
+        "min_ms": 777.778795,
+        "max_ms": 833.672619,
+        "mean_process_cpu_ms": 806.0813333333333,
+        "mib_per_second": 318.5936359624441,
+        "samples": [
+          {
+            "wall_ms": 833.672619,
+            "process_cpu_ms": 835.864
+          },
+          {
+            "wall_ms": 799.142877,
+            "process_cpu_ms": 801.513
+          },
+          {
+            "wall_ms": 777.778795,
+            "process_cpu_ms": 780.867
+          }
+        ]
+      },
+      "simulated_receive_qat": {
+        "mean_ms": 440.0296823333333,
+        "median_ms": 440.02698,
+        "min_ms": 440.002516,
+        "max_ms": 440.059551,
+        "mean_process_cpu_ms": 509.50333333333333,
+        "mib_per_second": 581.7789350993684,
+        "samples": [
+          {
+            "wall_ms": 440.02698,
+            "process_cpu_ms": 511.848
+          },
+          {
+            "wall_ms": 440.002516,
+            "process_cpu_ms": 507.509
+          },
+          {
+            "wall_ms": 440.059551,
+            "process_cpu_ms": 509.153
+          }
+        ]
+      },
+      "simulated_receive_qat_speedup_vs_cpu": 1.8260846088210898,
+      "receive_ranges_per_blob": 16,
+      "effective_request_max_bytes": 4194304
+    }
+  ],
+  "best_resident_measurement_index": 10,
+  "best_receive_measurement_index": 11
+}

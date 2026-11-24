@@ -1,0 +1,169 @@
+{
+  "generated_utc": "2026-11-21T05:07:53.115302959Z",
+  "go_version": "go1.27.4",
+  "device": {
+    "Instance": 0,
+    "NUMANode": 0,
+    "PCI": "3d:01.0"
+  },
+  "blob_bytes": 268435456,
+  "allocation_bytes": 4194304,
+  "request_bytes": 4194304,
+  "poll_us": 250,
+  "warmup_rounds": 1,
+  "measured_rounds": 7,
+  "sha256": "ad393ddd80e45166dff61eb09641bddbd2e4df8fff9ce4b7b6516dda4d580cdb",
+  "all_digests_verified": true,
+  "first_fresh_after_engine_open": {
+    "alloc_ms": 47.176684,
+    "free_ms": 24.226841,
+    "lease_ms": 0.008376999999999999,
+    "fill_ms": 81.315905,
+    "hash_ms": 442.746391,
+    "total_ms": 595.476694
+  },
+  "reused_pool_one_time_alloc_ms": 59.193875,
+  "reused_pool_one_time_free_ms": 7.926087,
+  "reuse_mean": {
+    "alloc_ms": 0,
+    "free_ms": 0,
+    "lease_ms": 0.003893571428571429,
+    "fill_ms": 69.0472187142857,
+    "hash_ms": 442.5510618571429,
+    "total_ms": 511.60381442857135
+  },
+  "fresh_mean": {
+    "alloc_ms": 54.00939371428571,
+    "free_ms": 17.344213714285715,
+    "lease_ms": 0.010823571428571429,
+    "fill_ms": 85.52226271428572,
+    "hash_ms": 442.2756132857143,
+    "total_ms": 599.164331
+  },
+  "reuse_samples": [
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.003561,
+      "fill_ms": 60.74803,
+      "hash_ms": 440.865452,
+      "total_ms": 501.618247
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.0033109999999999997,
+      "fill_ms": 74.787364,
+      "hash_ms": 441.797572,
+      "total_ms": 516.590141
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.005052,
+      "fill_ms": 68.917835,
+      "hash_ms": 443.146616,
+      "total_ms": 512.071419
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.003704,
+      "fill_ms": 74.207306,
+      "hash_ms": 444.824368,
+      "total_ms": 519.037396
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.005163,
+      "fill_ms": 69.796526,
+      "hash_ms": 442.342203,
+      "total_ms": 512.145479
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.003365,
+      "fill_ms": 74.950548,
+      "hash_ms": 442.37954,
+      "total_ms": 517.335059
+    },
+    {
+      "alloc_ms": 0,
+      "free_ms": 0,
+      "lease_ms": 0.003099,
+      "fill_ms": 59.922922,
+      "hash_ms": 442.501682,
+      "total_ms": 502.42896
+    }
+  ],
+  "fresh_samples": [
+    {
+      "alloc_ms": 46.361808,
+      "free_ms": 8.600611,
+      "lease_ms": 0.052235,
+      "fill_ms": 103.376277,
+      "hash_ms": 442.69775,
+      "total_ms": 601.091102
+    },
+    {
+      "alloc_ms": 58.397351,
+      "free_ms": 24.548801,
+      "lease_ms": 0.003998,
+      "fill_ms": 81.592255,
+      "hash_ms": 444.007204,
+      "total_ms": 608.551756
+    },
+    {
+      "alloc_ms": 58.527888,
+      "free_ms": 24.144567,
+      "lease_ms": 0.003984,
+      "fill_ms": 84.030872,
+      "hash_ms": 442.092092,
+      "total_ms": 608.802047
+    },
+    {
+      "alloc_ms": 63.332194,
+      "free_ms": 7.690586,
+      "lease_ms": 0.003956,
+      "fill_ms": 85.123727,
+      "hash_ms": 442.716352,
+      "total_ms": 598.868237
+    },
+    {
+      "alloc_ms": 46.283689,
+      "free_ms": 24.479741,
+      "lease_ms": 0.004341,
+      "fill_ms": 80.880757,
+      "hash_ms": 441.026674,
+      "total_ms": 592.676943
+    },
+    {
+      "alloc_ms": 47.164148,
+      "free_ms": 24.134746,
+      "lease_ms": 0.003653,
+      "fill_ms": 81.499958,
+      "hash_ms": 440.932901,
+      "total_ms": 593.737684
+    },
+    {
+      "alloc_ms": 57.998678,
+      "free_ms": 7.810444,
+      "lease_ms": 0.003598,
+      "fill_ms": 82.151993,
+      "hash_ms": 442.45632,
+      "total_ms": 590.422548
+    }
+  ],
+  "fresh_minus_reuse_mean_total_ms": 87.5605165714286,
+  "measurement_notes": [
+    "Engine initialization and shutdown are excluded. Each hash includes a new SHA256 session, submission, completion and session close.",
+    "Fresh creates one pool and its DMA allocations/alias mapping, then destroys that pool including native qaeMemFreeNUMA cleanup and unmapping.",
+    "Reuse retains one pool; its one-time allocation/free are reported separately. Lease includes Acquire, Bytes and Release.",
+    "The first fresh sample is the first pool after engine open, not a cold boot or flushed kernel/USDM cache. It is excluded from measured means.",
+    "Fresh and reuse order alternates by round. Warmups are excluded. Total is directly timed, not a sum of phase means.",
+    "Fill is a deterministic synthetic memory write, not network or disk I/O. CPU SHA256 reference and digest comparisons are outside sample timing.",
+    "At most two full-size DMA buffers coexist: the retained pool and the current fresh pool; allocation rounding and native metadata add overhead."
+  ]
+}
