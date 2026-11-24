@@ -4,6 +4,7 @@
 /qatparallel
 /qatgo.test
 /qatgo-race.test
+/.qat-sdk/
 
 # Local diagnostics can include host-specific kernel output.
 *.log

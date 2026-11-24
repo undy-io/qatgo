@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Linux / Go ${{ matrix.go }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        go: ['1.22.x', stable]
+    env:
+      CGO_ENABLED: '1'
+      QATGO_TEST_HW: '0'
+    steps:
+      - name: Check out Go module
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version: ${{ matrix.go }}
+          cache: false
+
+      - name: Check out pinned legacy QAT SDK
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: undy-io/qat-legacy-linux
+          ref: 2fdec65dc9e2ecc5321922b3cfde9f1063e4d804
+          path: .qat-sdk
+          persist-credentials: false
+
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential pkg-config gawk pciutils nasm libboost-dev \
+            libudev-dev zlib1g-dev libssl-dev libnl-3-dev libnl-genl-3-dev \
+            linux-headers-generic
+
+      - name: Build userspace SDK without hardware
+        run: bash .github/scripts/build-qat-sdk.sh "$GITHUB_WORKSPACE/.qat-sdk"
+
+      - name: Configure cgo SDK paths
+        run: |
+          echo "QAT_SOURCE=$GITHUB_WORKSPACE/.qat-sdk" >> "$GITHUB_ENV"
+          echo "CGO_LDFLAGS=-L$GITHUB_WORKSPACE/.qat-sdk/build -Wl,-rpath,$GITHUB_WORKSPACE/.qat-sdk/build" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/.qat-sdk/build" >> "$GITHUB_ENV"
+
+      - name: Check Go formatting
+        run: |
+          unformatted="$(git ls-files -z -- '*.go' | xargs -0 gofmt -l)"
+          if [[ -n "$unformatted" ]]; then
+            echo 'Run gofmt on these files:'
+            printf '%s\n' "$unformatted"
+            exit 1
+          fi
+
+      - name: Build commands
+        run: make build
+
+      - name: Test without hardware
+        run: |
+          echo 'QAT hardware tests are intentionally skipped on GitHub-hosted CI.'
+          echo 'Maintainers must qualify actual QAT hardware before publishing a tag.'
+          make test
+
+      - name: Vet
+        run: make vet

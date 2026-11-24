@@ -322,6 +322,29 @@ are compared with Go `crypto/sha256`. The hardware race/cgo check run passed;
 its inspected kernel output contained no QAT errors. Local diagnostic logs are
 not published because they can contain unrelated host details.
 
+## CI and release qualification
+
+[GitHub Actions](.github/workflows/ci.yml) builds on hosted Ubuntu 24.04 x86-64
+runners for branch pushes, pull requests, version tags and manual runs. It
+checks the minimum supported Go version and the current stable Go release.
+The workflow builds the native SDK's userspace libraries at a pinned
+`qat-legacy-linux` revision, then checks formatting, builds the Go package and
+command-line tools, and runs vet and tests that do not require hardware.
+It does not install or load QAT kernel modules or start devices.
+
+There is no QAT-equipped CI runner. Hardware tests are explicitly disabled in
+hosted CI; their skipped status is expected and is not hardware qualification.
+The maintainer qualifies the intended release commit on an available QAT
+system **before creating a release tag**, including the hardware test and
+race/cgo-check targets above. Record the tested hardware, kernel, native driver
+revision and results in the release notes. A green hosted build alone does
+not establish DMA correctness, device compatibility or performance.
+
+Version-tag builds use the same hosted checks. The library is distributed as
+Go module source, and consumers still need the native SDK and runtime described
+above. Updating the SDK pin is a deliberate dependency change that requires
+fresh manual hardware qualification before release.
+
 ## Measure sizes and polling
 
 `qatbench` compares Go `crypto/sha256` with direct QAT CPA calls and verifies
